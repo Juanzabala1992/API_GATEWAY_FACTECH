@@ -14,18 +14,20 @@ import static org.springframework.security.config.http.SessionCreationPolicy.STA
 
 @Configuration
 @EnableWebSecurity
-public class SecurityConfiguration {
+public class SecurityConfig {
 
-     @Bean
+    @Bean
+    public JwtDecoder customJwtDecoder() {
+        return NimbusJwtDecoder.withJwkSetUri("http://localhost:9090/realms/mycompany-microservices-realm/protocol/openid-connect/certs").build();
+    }
+    @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-
         http
                 .csrf()
                 .disable()
                 .authorizeHttpRequests()
                 .anyRequest()
                 .authenticated();
-
         http
                 .sessionManagement()
                 .sessionCreationPolicy(STATELESS);

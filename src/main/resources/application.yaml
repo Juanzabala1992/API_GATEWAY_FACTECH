@@ -24,12 +24,6 @@ spring:
             - Path=/crud/**
           filters:
             - StripPrefix=1
-jwt:
-  auth:
-    converter:
-      resource-id: spring-cloud-gateway-client
-      principle-attribute: preferred_username
-
 server:
   port: 8091
 
@@ -41,3 +35,4 @@ eureka:
 logging:
   level:
     root: INFO
+    org.springframework.security: DEBUG
